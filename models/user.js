@@ -24,6 +24,11 @@ schema.methods.encryptPassword = async function (password) {
   return hashPassword;
 };
 
+schema.methods.checkPassword = async function (password) {
+  const isValid = await bcrypt.compare(password, this.password);
+  return isValid;
+};
+
 const user = mongoose.model("User", schema);
 
 module.exports = user;
